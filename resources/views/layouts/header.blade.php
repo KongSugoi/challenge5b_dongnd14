@@ -150,14 +150,21 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('admin/admin/list')}}" class="nav-link">
+            <a href="{{url('admin/admin/list')}}" class="nav-link ">
               <i class="nav-icon far fa-user"></i>
               <p>
-                Admin
+                Teacher lists
               </p>
             </a>
           </li>   
-
+          <li class="nav-item">
+            <a href="{{url('admin/subject/list')}}" class="nav-link ">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Subject
+              </p>
+            </a>
+          </li> 
           @elseif(Auth::user()->user_type==2)      
             <li class="nav-item">
             <a href="{{ url('student/dashboard')}}" class="nav-link">
@@ -171,7 +178,7 @@
             <a href="{{url('#')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
-                Admin
+                User Lists
               </p>
             </a>
           </li>   

@@ -9,21 +9,63 @@ class AdminController extends Controller
 {
     public function list()
     {
-        
-        return view("admin/admin/list");
+        $data['getRecord'] = User::getAdmin();        
+        return view("admin/admin/list",$data);
     }
     public function add()
-    {
-        
+    {    
         return view("admin/admin/add");
     }
     public function insert(Request $request)
-    {
+    {       
+        
         $user= new User;
         $user->name = trim ($request->name);
         $user->email = trim ($request->email);
+        $user->phone = trim ($request->phone);
         $user->password = Hash::make($request->password);
-        $user->photo = trim(strip_tags($request->photo));
+        $user->user_type = 1;
+       // $user->photo = trim(strip_tags($request->photo));
         $user->save();
+
+        return redirect('admin/admin/list')->with('success',"Teacher successfully created");    
+    }
+
+    public function edit($id)
+    {
+        $data['getRecord']= User::getSingle($id);
+        if(!empty($data['getRecord']))
+        {
+            return view('admin.admin.edit',$data);
+        }        
+        else 
+        {
+            abort(404);
+        }
+    }
+
+    public function update($id, Request $request)
+    {
+        $user= User::getSingle($id);
+        $user->name = trim ($request->name);
+        $user->email = trim ($request->email);
+        $user->phone = trim ($request->phone);
+        if(!empty($request->password))
+        {
+            $user->password = Hash::make($request->password);
+        }    
+       // $user->photo = trim(strip_tags($request->photo));
+        $user->save();
+
+        return redirect('admin/admin/list')->with('success',"Teacher successfully updated"); 
+    }
+
+    public function delete($id)
+    {
+        $user= User::getSingle($id);
+        $user->is_delete=1;
+        $user->save();
+
+        return redirect('admin/admin/list')->with('success',"Teacher successfully deleted"); 
     }
 }
