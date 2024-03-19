@@ -17,8 +17,7 @@ class AdminController extends Controller
         return view("admin/admin/add");
     }
     public function insert(Request $request)
-    {       
-        
+    {           
         $user= new User;
         $user->name = trim ($request->name);
         $user->email = trim ($request->email);

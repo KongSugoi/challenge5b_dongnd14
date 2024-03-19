@@ -158,10 +158,26 @@
             </a>
           </li>   
           <li class="nav-item">
+            <a href="{{url('admin/student/list')}}" class="nav-link ">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Student lists
+              </p>
+            </a>
+          </li>   
+          <li class="nav-item">
             <a href="{{url('admin/subject/list')}}" class="nav-link ">
               <i class="nav-icon far fa-user"></i>
               <p>
                 Subject
+              </p>
+            </a>
+          </li> 
+          <li class="nav-item">
+            <a href="{{url('admin/change_password')}}" class="nav-link ">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Change Password
               </p>
             </a>
           </li> 
@@ -182,7 +198,16 @@
               </p>
             </a>
           </li>   
-          @endif                        
+          <li class="nav-item">
+            <a href="{{url('student/change_password')}}" class="nav-link ">
+              <i class="nav-icon far fa-user"></i>
+              <p>
+                Change Password
+              </p>
+            </a>
+          </li> 
+          @endif   
+                               
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
