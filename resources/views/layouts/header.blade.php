@@ -119,7 +119,7 @@
   </nav>  <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="{{ url('public/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Student MS</span>
     </a>
@@ -127,12 +127,13 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
+      @if (Auth::user()->user_type==1) 
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{ url('public/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+        <div class="image">       
+          <img src="{{url('upload/profile')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{Auth::user()->name}}</a>
+          <a href="{{url('admin/account')}}" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>      
 
@@ -140,7 +141,7 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
          
-        @if (Auth::user()->user_type==1)          
+          
             <li class="nav-item">
             <a href="{{ url('admin/dashboard')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -181,7 +182,19 @@
               </p>
             </a>
           </li> 
-          @elseif(Auth::user()->user_type==2)      
+
+          @elseif(Auth::user()->user_type==2)  
+           
+          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+              <img src="{{ url('public/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+            </div>
+           <div class="info">
+             <a href="{{url('student/account')}}" class="d-block">{{Auth::user()->name}}</a>
+            </div>
+         </div>  
+         <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">   
             <li class="nav-item">
             <a href="{{ url('student/dashboard')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -191,7 +204,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{url('#')}}" class="nav-link">
+            <a href="{{url('student/list')}}" class="nav-link">
               <i class="nav-icon far fa-user"></i>
               <p>
                 User Lists
@@ -207,7 +220,23 @@
             </a>
           </li> 
           @endif   
-                               
+          <li class="nav-item">
+            <a href="#" class = "nav-link">
+              <i class= "nav-icon fas fa-table"></i>
+              <p>
+                Homework
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('admin/homework/homework')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Homework</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>

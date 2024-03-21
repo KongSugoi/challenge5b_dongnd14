@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
+use Str; 
+use Auth;
 class AdminController extends Controller
 {
     public function list()
@@ -24,7 +26,17 @@ class AdminController extends Controller
         $user->phone = trim ($request->phone);
         $user->password = Hash::make($request->password);
         $user->user_type = 1;
-       // $user->photo = trim(strip_tags($request->photo));
+        if(!empty($request->file('profile_pic')))
+        {
+            $ext = $request->file('profile_pic')->getClientOriginalExtension();
+            $file = $request->file('profile_pic');
+            $randomStr = Str::random(20);
+            $filename = strtolower($randomStr).'.'.$ext;
+            $file->move('upload/profile/',$filename);
+
+            $user->profile_pic = $filename;
+        }
+
         $user->save();
 
         return redirect('admin/admin/list')->with('success',"Teacher successfully created");    
@@ -53,7 +65,20 @@ class AdminController extends Controller
         {
             $user->password = Hash::make($request->password);
         }    
-       // $user->photo = trim(strip_tags($request->photo));
+        if(!empty($request->file('profile_pic')))
+        {
+            if(!empty($user->getProfile()))
+            {
+                unlink('upload/profile/'.$user->profile_pic);
+            }
+            $ext = $request->file('profile_pic')->getClientOriginalExtension();
+            $file = $request->file('profile_pic');
+            $randomStr = Str::random(20);
+            $filename = strtolower($randomStr).'.'.$ext;
+            $file->move('upload/profile/',$filename);
+
+            $user->profile_pic = $filename;
+        } 
         $user->save();
 
         return redirect('admin/admin/list')->with('success',"Teacher successfully updated"); 

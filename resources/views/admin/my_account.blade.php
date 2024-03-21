@@ -7,12 +7,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Add New Teacher</h1>
+            <h1>My account</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active">Add New Teacher</li>
+              <li class="breadcrumb-item active">My account</li>
             </ol>
           </div>
         </div>
@@ -25,37 +25,37 @@
         <div class="row">
           <!-- left column -->
           <div class="col-md-12">
+            @include('_message')
             <!-- general form elements -->
             <div class="card card-primary">             
               <!-- form start -->
-              <form method="post" action="" enctype="multipart/form-data">
+              <form method="post" action="">
                 {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
                     <label for="exampleInputUsername">Username</label>
-                    <input type="text" class="form-control" name="name" required placeholder="Enter username">
+                    <input type="text" class="form-control" name="name" value="{{$getRecord->name}}" required placeholder="Enter username">
                   </div>                   
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" class="form-control" name="email" required placeholder="Enter email">                    
+                    <input type="email" class="form-control" name="email" value="{{$getRecord->email}}" required placeholder="Enter email">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Phone Number</label>
-                    <input type="text" class="form-control" name="phone" required placeholder="Enter phone number">
-                  </div>
-                  <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" name="password" required placeholder="Password">
-                  </div>
+                    <input type="text" class="form-control" name="phone" value="{{$getRecord->phone}}" required placeholder="Enter phone number">
+                  </div>                  
                   <div class="form-group">
                     <label>Profile Pic<span style="color: red"></span></label>
                     <input type="file" class="form-control" name="profile_pic">
-                  </div>                                 
+                    @if(!empty($getRecord->getProfile()))
+                      <img src="{{$getRecord->getProfile()}}" style="width: 100px;">
+                    @endif
+                  </div>                              
                 </div>
                 <!-- /.card-body -->
 
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Update</button>
                 </div>
               </form>
             </div>        

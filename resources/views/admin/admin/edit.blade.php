@@ -12,7 +12,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{url('admin/dashboard')}}">Home</a></li>
-              <li class="breadcrumb-item active">Add New Teacher</li>
+              <li class="breadcrumb-item active">Edit Teacher</li>
             </ol>
           </div>
         </div>
@@ -28,7 +28,7 @@
             <!-- general form elements -->
             <div class="card card-primary">             
               <!-- form start -->
-              <form method="post" action="">
+              <form method="post" action="" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
@@ -45,20 +45,15 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" class="form-control" name="password" value="{{$getRecord->password}}" placeholder="Password">                    
+                    <input type="password" class="form-control" name="password" value="" placeholder="Password">                    
                   </div>
-                  <!--<div class="form-group">
-                    <label for="photo">Avatar</label>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="photo" id="photo" accept="image/*">
-                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                      </div>
-                      <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                      </div>
-                    </div>
-                  </div> -->               
+                  <div class="form-group">
+                    <label>Profile Pic<span style="color: red"></span></label>
+                    <input type="file" class="form-control" name="profile_pic">
+                    @if(!empty($getRecord->getProfile()))
+                      <img src="{{$getRecord->getProfile()}}" style="width: 100px;">
+                    @endif
+                  </div>                              
                 </div>
                 <!-- /.card-body -->
 

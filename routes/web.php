@@ -8,6 +8,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\HomeworkController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +39,10 @@ Route::get('admin/admin/list', function () {
 
 Route::group(['middleware'=>'teacher'], function () {
 
+    //account
+   
+    Route::get('admin/account', [UserController::class, 'MyAccount']);    
+    Route::post('admin/account', [UserController::class, 'UpdateMyAccount']);    
 
     //add teacher
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);    
@@ -52,6 +57,10 @@ Route::group(['middleware'=>'teacher'], function () {
     Route::get('admin/student/list', [StudentController::class, 'list']);    
     Route::get('admin/student/add', [StudentController::class, 'add']); 
     Route::post('admin/student/add', [StudentController::class, 'insert']);
+    Route::get('admin/student/edit/{id}', [StudentController::class, 'edit']);
+    Route::post('admin/student/edit/{id}', [StudentController::class, 'update']);
+    Route::get('admin/student/delete/{id}', [StudentController::class, 'delete']); 
+
     // subject   
     Route::get('admin/subject/list', [SubjectController::class, 'list']);    
     Route::get('admin/subject/add', [SubjectController::class, 'add']); 
@@ -59,7 +68,12 @@ Route::group(['middleware'=>'teacher'], function () {
     Route::get('admin/subject/edit/{id}', [SubjectController::class, 'edit']); 
     Route::post('admin/subject/edit/{id}', [SubjectController::class, 'update']);
     Route::get('admin/subject/delete/{id}', [SubjectController::class, 'delete']); 
+
+    //homework
+    Route::get('admin/homework/homework', [HomeworkController::class, 'homework']);    
+    Route::get('admin/homework/homework/add', [HomeworkController::class, 'add']);    
 });
+    
 
     //change password
     Route::get('admin/change_password', [UserController::class, 'change_password']); 
@@ -67,7 +81,13 @@ Route::group(['middleware'=>'teacher'], function () {
 
 Route::group(['middleware'=>'student'], function () {
 
+
+    Route::get('student/account', [UserController::class, 'MyAccount']);    
+    Route::post('student/account', [UserController::class, 'UpdateMyAccountStudent']);    
+    
     Route::get('student/dashboard', [DashboardController::class, 'dashboard']);   
+    Route::get('student/list', [UserController::class, 'listall']); 
+    Route::get('student/view/{id}', [UserController::class, 'view']);   
     
     //change password
     Route::get('student/change_password', [UserController::class, 'change_password']); 
