@@ -110,7 +110,8 @@ class UserController extends Controller
         {
             $user->password = Hash::make($request->new_password);
             $user->save();
-            return redirect()->back()->with('Success',"password successfully updated");
+            
+            return redirect()->back()->with('Success',"Password successfully updated");
         }
         else
         {

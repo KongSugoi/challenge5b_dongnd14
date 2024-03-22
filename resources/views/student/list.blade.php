@@ -46,9 +46,12 @@
                     </tr>
                   </thead>
                   <tbody>
+                      @php
+                        $counter = 1; 
+                      @endphp
                       @foreach($getRecord as $value)                         
                         <tr>
-                          <td>{{$value->id}}</td>
+                          <td>{{$counter}}</td>
                           <td>{{$value->name}}</td>
                           <td>{{$value->email}}</td>
                           <td>{{$value->phone}}</td>
@@ -56,7 +59,10 @@
                           <td>
                             <a href="{{url('student/view/'.$value->id)}}" class="btn btn-primary">View</a>
                             </td>                                               
-                        </tr>                   
+                        </tr>     
+                        @php
+                          $counter++; 
+                        @endphp              
                       @endforeach
                   </tbody>
                 </table>

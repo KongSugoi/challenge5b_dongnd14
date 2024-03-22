@@ -47,9 +47,12 @@
                     </tr>
                   </thead>
                   <tbody>
+                      @php
+                        $counter = 1; 
+                      @endphp
                       @foreach($getRecord as $value)                         
                         <tr>
-                          <td>{{$value->id}}</td>
+                          <td>{{$counter}}</td>
                           <td>{{$value->name}}</td>
                           <td>{{$value->email}}</td>
                           <td>{{$value->phone}}</td>
@@ -58,7 +61,10 @@
                             <a href="{{url('admin/student/edit/'.$value->id)}}" class="btn btn-primary">Edit</a>
                             <a href="{{url('admin/student/delete/'.$value->id)}}" class="btn btn-danger">Delete</a>                            
                           </td>                      
-                        </tr>                   
+                        </tr> 
+                      @php
+                        $counter++; 
+                      @endphp                  
                       @endforeach
                   </tbody>
                 </table>

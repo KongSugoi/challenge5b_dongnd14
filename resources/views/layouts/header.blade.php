@@ -127,7 +127,9 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
+
       @if (Auth::user()->user_type==1) 
+
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">       
           <img src="{{url('upload/profile')}}" class="img-circle elevation-2" alt="User Image">
@@ -167,13 +169,22 @@
             </a>
           </li>   
           <li class="nav-item">
-            <a href="{{url('admin/subject/list')}}" class="nav-link ">
-              <i class="nav-icon far fa-user"></i>
+            <a href="#" class = "nav-link">
+              <i class= "nav-icon fas fa-table"></i>
               <p>
-                Subject
+                Homework
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-          </li> 
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('admin/homework/homework')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Homework</p>
+                </a>
+              </li>
+            </ul>
+          </li>
           <li class="nav-item">
             <a href="{{url('admin/change_password')}}" class="nav-link ">
               <i class="nav-icon far fa-user"></i>
@@ -219,7 +230,6 @@
               </p>
             </a>
           </li> 
-          @endif   
           <li class="nav-item">
             <a href="#" class = "nav-link">
               <i class= "nav-icon fas fa-table"></i>
@@ -230,13 +240,24 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{url('admin/homework/homework')}}" class="nav-link">
+                <a href="{{url('student/my_homework')}}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Homework</p>
+                <p>My Homework</p>
+                </a>
+              </li>
+            </ul>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{url('student/my_submitted_homework')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>My Submitted Homework</p>
                 </a>
               </li>
             </ul>
           </li>
+
+          @endif             
+
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>

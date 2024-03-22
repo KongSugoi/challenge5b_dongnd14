@@ -5,11 +5,8 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1> Homework Board</h1>
-                </div>
-                <div class="col-sm-6" style="text-align: right;">
-                    <a href="{{url('admin/homework/homework/add')}}" class="btn btn-primary">Add New Homework</a>
-                </div>
+                    <h1> My Homework Board</h1>
+                </div>                
             </div>  
         </div>
     </section>
@@ -33,7 +30,7 @@
                                         <th>Submission Date</th>
                                         <th>Document</th>
                                         <th>Description</th>
-                                        <th>Create Date</th>
+                                        <th>Created Date</th>
                                         <th>Action<th>
                                     </tr>
                                 </thead>
@@ -48,13 +45,14 @@
                                         <td>{{date('d-m-Y',strtotime($value->submission_date))}}</td>
                                         <td>
                                             @if(!empty($value->getDocument()))
-                                                <a href="{{ asset('upload/homework/'.$value->document_file) }}" download>{{ $value->document_file }}</a>
+                                                <a href="{{ asset('upload/homework/'.$value->document_file) }}" download>
+                                                    {{ strlen($value->document_file) > 10 ? substr($value->document_file, 0, 10) . ' ..' : 
+                                                        $value->document_file }}</a>
                                             @endif
                                         <td>{!! $value->description !!}</td>
                                         <td>{{date('d-m-Y',strtotime($value->created_at))}}</td>
                                         <td>
-                                            <a href="{{url('admin/homework/homework/edit/'.$value->id)}}" class="btn btn-primary">Edit</a>
-                                            <a href="{{url('admin/homework/homework/delete/'.$value->id)}}" class="btn btn-danger">Delete</a>                            
+                                            <a href="{{url('student/my_homework/submit_homework/'.$value->id)}}" class="btn btn-primary">Submit Homework</a>                                            
                                         </td>
                                     </tr>
                                     @php

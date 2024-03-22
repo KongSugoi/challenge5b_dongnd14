@@ -15,7 +15,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Add New Homework</h1>
+                    <h1>Submit My Homework</h1>
                 </div>
             </div>
         </div>
@@ -30,16 +30,6 @@
                         <form method="post" action="" enctype="multipart/form-data">
                         {{ csrf_field() }}
                             <div class="card-body">                                
-
-                                <div class="form-group">
-                                    <label>Homework Date<span style="color:red">*</span></label>
-                                    <input type="date" class="form-control" name="homework_date" required>
-                                </div>
-
-                                <div class="form-group">
-                                    <label>Submission Date<span style="color:red">*</span></label>
-                                    <input type="date" class="form-control" name="submission_date" required>
-                                </div>
 
                                 <div class="form-group">
                                     <label>Document<span style="color:red">*</span></label>
