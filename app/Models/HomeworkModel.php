@@ -12,7 +12,7 @@ class HomeworkModel extends Model
 
     static public function getHomework()
     {
-        return self::select('homework.*')
+        return self::select('homework.*')            
                 ->where('homework.is_delete','=',0)
                 ->orderBy('homework.id','desc')
                 ->get();
@@ -31,6 +31,17 @@ class HomeworkModel extends Model
         return $return;
     }
 
+    static public function getRecordStudent($student_id)
+    {
+        $return = HomeworkModel::select('homework.*')
+                ->where('homework.is_delete','=',0)
+                ->whereNotIn('homework.id', function($query) use ($student_id) 
+                {
+                    $query->select('homework_submit.homework_id')
+                            ->from('homework_submit')
+                            ->where('homework_submit.studen_id','=',$student_id);
+                });
+    }
     public function getDocument()
     {
         if(!empty($this->document_file)&& file_exists('upload/homework/'.$this->document_file))
@@ -39,7 +50,7 @@ class HomeworkModel extends Model
         }
         else  
         {
-
+            return "";
         }
     }
 

@@ -10,9 +10,7 @@
           <div class="col-sm-6">
             <h1>Student</h1>
           </div>
-          <div class="col-sm-6" style="text-align: right;">              
-
-            
+          <div class="col-sm-6" style="text-align: right;">                
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -58,6 +56,7 @@
                           <td>{{$value->created_at}}</td> 
                           <td>
                             <a href="{{url('student/view/'.$value->id)}}" class="btn btn-primary">View</a>
+                            <a href="{{url('chat?receiver_id='.base64_encode($value->id))}}" class="btn btn-success">Send Message</a>                            
                             </td>                                               
                         </tr>     
                         @php

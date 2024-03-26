@@ -89,4 +89,24 @@ class User extends Authenticatable
                 ->orderBy('users.id','desc')
                 ->get();
     }
+
+    static public function getTotalUser($user_type)
+    {
+        return self::select('users.id')
+                    ->where('user_type','=', $user_type)
+                    ->where('is_delete','=', 0)
+                    ->count();
+    }
+
+    public function getProfileDirect()
+    {
+        if(!empty($this->profile_pic) && file_exists('upload/profile/'.$this->profile_pic))
+        {
+            return url('upload/profile/'.$this->profile_pic);
+        }
+        else 
+        {
+            return url('upload/profile/user.jpg');
+        }
+    }
 }

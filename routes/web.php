@@ -9,6 +9,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\HomeworkController;
+use App\Http\Controllers\ChatController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,15 +31,16 @@ Route::get('admin/dashboard', function () {
     return view('admin.dashboard');
 });
 
-
-
 Route::get('admin/admin/list', function () {
     return view('admin.admin.list');
 });
 
+Route::group(['middleware'=>'common'], function () {
+    Route::get('chat', [ChatController::class, 'chat']);  
+    Route::post('submit_message', [ChatController::class, 'submit_message']);  
+});
 
-Route::group(['middleware'=>'teacher'], function () {
-
+Route::group(['middleware'=>'teacher'], function () {    
     //account
    
     Route::get('admin/account', [UserController::class, 'MyAccount']);    
@@ -76,12 +78,14 @@ Route::group(['middleware'=>'teacher'], function () {
     Route::get('admin/homework/homework/edit/{id}', [HomeworkController::class, 'edit']); 
     Route::post('admin/homework/homework/edit/{id}', [HomeworkController::class, 'update']);
     Route::get('admin/homework/homework/delete/{id}', [HomeworkController::class, 'delete']);
-});
-    
+    Route::get('admin/homework/homework/submitted/{id}', [HomeworkController::class, 'submitted']);
 
     //change password
     Route::get('admin/change_password', [UserController::class, 'change_password']); 
     Route::post('admin/change_password', [UserController::class, 'update_change_password']); 
+});
+
+    
 
 Route::group(['middleware'=>'student'], function () {
 
@@ -94,8 +98,7 @@ Route::group(['middleware'=>'student'], function () {
     Route::get('student/view/{id}', [UserController::class, 'view']);   
     
     //homework 
-    Route::get('student/my_homework', [HomeworkController::class, 'HomeworkStudent']); 
-    //Route::get('student/my_homework/view/{id}', [HomeworkController::class, 'view']);
+    Route::get('student/my_homework', [HomeworkController::class, 'HomeworkStudent']);    
     Route::get('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'SubmitHomework']);
     Route::post('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'SubmitHomeworkInsert']);
     Route::get('student/my_submitted_homework', [HomeworkController::class, 'HomeworkSubmittedStudent']); 
@@ -104,9 +107,4 @@ Route::group(['middleware'=>'student'], function () {
     //change password
     Route::get('student/change_password', [UserController::class, 'change_password']); 
     Route::post('student/change_password', [UserController::class, 'update_change_password']); 
-});
-
-Route::controller(ImageController::class)->group(function(){
-    Route::get('image-upload', 'index');
-    Route::post('image-upload', 'store')->name('image.store');
 });

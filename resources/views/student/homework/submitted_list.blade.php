@@ -35,7 +35,6 @@
                                         <th>Submitted Document</th>
                                         <th>Submitted Description</th>
                                         <th>Submitted Created Date</th>
-                                        <th>Action<th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,16 +44,16 @@
                                     @forelse($getRecord as $value)
                                     <tr>
                                         <td>{{$counter}}</td>
-                                        <td>{{date('d-m-Y',strtotime($value->homework_date))}}</td>
-                                        <td>{{date('d-m-Y',strtotime($value->submission_date))}}</td>
+                                        <td>{{date('d-m-Y',strtotime($value->getHomework->homework_date))}}</td>
+                                        <td>{{date('d-m-Y',strtotime($value->getHomework->submission_date))}}</td>
                                         <td>
                                             @if(!empty($value->getDocument()))
-                                                <a href="{{ asset('upload/homework/'.$value->document_file) }}" download>
-                                                    {{ strlen($value->document_file) > 10 ? substr($value->getHomework->document_file, 0, 10) . ' ..' : 
-                                                        $value->document_file }}</a>
+                                                <a href="{{ asset('upload/homework/'.$value->getHomework->document_file) }}" download>
+                                                    {{ strlen($value->getHomework->document_file) > 10 ? substr($value->getHomework->document_file, 0, 10) . ' ..' : 
+                                                        $value->getHomework->document_file }}</a>
                                             @endif
-                                        <td>{!! $value->description !!}</td>
-                                        <td>{{date('d-m-Y',strtotime($value->created_at))}}</td>
+                                        <td>{!! $value->getHomework->description !!}</td>
+                                        <td>{{date('d-m-Y',strtotime($value->getHomework->created_at))}}</td>
 
                                         <td>
                                             @if(!empty($value->getDocument()))
@@ -63,10 +62,7 @@
                                                         $value->document_file }}</a>
                                             @endif
                                         <td>{!! $value->description !!}</td>
-                                        <td>{{date('d-m-Y',strtotime($value->created_at))}}</td>
-                                        <td>
-                                            <a href="{{url('student/my_homework/submit_homework/'.$value->id)}}" class="btn btn-primary">Submit Homework</a>                                            
-                                        </td>
+                                        <td>{{date('d-m-Y',strtotime($value->created_at))}}</td>                                    
                                     </tr>
                                     @php
                                         $counter++; 

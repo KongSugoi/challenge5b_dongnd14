@@ -50,11 +50,13 @@
                                             @if(!empty($value->getDocument()))
                                                 <a href="{{ asset('upload/homework/'.$value->document_file) }}" download>{{ $value->document_file }}</a>
                                             @endif
+                                        </td>
                                         <td>{!! $value->description !!}</td>
                                         <td>{{date('d-m-Y',strtotime($value->created_at))}}</td>
                                         <td>
                                             <a href="{{url('admin/homework/homework/edit/'.$value->id)}}" class="btn btn-primary">Edit</a>
-                                            <a href="{{url('admin/homework/homework/delete/'.$value->id)}}" class="btn btn-danger">Delete</a>                            
+                                            <a href="{{url('admin/homework/homework/delete/'.$value->id)}}" class="btn btn-danger">Delete</a> 
+                                            <a href="{{url('admin/homework/homework/submitted/'.$value->id)}}" class="btn btn-success">Submitted Homework</a>                            
                                         </td>
                                     </tr>
                                     @php
