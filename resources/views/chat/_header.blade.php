@@ -5,7 +5,13 @@
         </a>
         <div class="chat-about">
             <h6 class="m-b-0">{{$getReceiver->name}}</h6>
-            <small>Last seen: {{Carbon\Carbon::parse($getReceiver->updated_at)->diffForHumans()}}</small>
+            <small>
+
+                {{$getReceiver->OnlineUser($getReceiver->id)}}
+                
+                Last seen: {{Carbon\Carbon::parse($getReceiver->updated_at)->diffForHumans()}}
+
+            </small>
         </div>
     </div>
     

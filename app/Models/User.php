@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-
+use Cache;
+use Request;
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -108,5 +109,9 @@ class User extends Authenticatable
         {
             return url('upload/profile/user.jpg');
         }
+    }
+    static public function OnlineUser($user_id)
+    {
+        return Cache::has('OnlineUser'.$user_id);
     }
 }

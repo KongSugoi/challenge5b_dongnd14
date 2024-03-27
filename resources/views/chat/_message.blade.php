@@ -6,9 +6,9 @@
 </div>
 <div class="chat-message clearfix">
     <form action="" id="submit_message" method="POST" class="mb-0">
-        <input type="text" value="{{$getReceiver->id}}" name="receiver_id">
+        <input type="hidden" value="{{$getReceiver->id}}" name="receiver_id">
         {{ csrf_field() }}        
-        <textarea name="message" required class="form-control"></textarea>        
+        <textarea name="message" id= "ClearMessage"required class="form-control"></textarea>        
         <div class="row">
             <div class="col-md-6 hidden-sm">                
                 <a href="javascript:void(0);" style="margin-top: 10px;" class="btn btn-outline-primary"><i class="fa fa-image"></i></a>                
