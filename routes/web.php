@@ -43,8 +43,8 @@ Route::group(['middleware'=>'common'], function () {
 });
 
 Route::group(['middleware'=>'teacher'], function () {    
-    //account
    
+    //account   
     Route::get('admin/account', [UserController::class, 'MyAccount']);    
     Route::post('admin/account', [UserController::class, 'UpdateMyAccount']);    
 

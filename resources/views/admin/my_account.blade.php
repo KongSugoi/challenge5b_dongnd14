@@ -29,7 +29,7 @@
             <!-- general form elements -->
             <div class="card card-primary">             
               <!-- form start -->
-              <form method="post" action="">
+              <form method="post" action="" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="card-body">
                   <div class="form-group">
