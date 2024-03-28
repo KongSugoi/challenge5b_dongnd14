@@ -110,8 +110,8 @@ class User extends Authenticatable
             return url('upload/profile/user.jpg');
         }
     }
-    static public function OnlineUser($user_id)
+    public function OnlineUser()
     {
-        return Cache::has('OnlineUser'.$user_id);
+        return Cache::has('OnlineUser'.$this->id);
     }
 }

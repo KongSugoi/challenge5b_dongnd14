@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use Request;
+use Auth;
 class ChatModel extends Model
 {
     use HasFactory;
@@ -44,7 +45,7 @@ class ChatModel extends Model
 
     public function getConnectUser()
     {
-        return $this->belongsTo(User::class, 'receiver_id');
+        return $this->belongsTo(User::class, 'connect_user_id');
     }
 
     static public function getChatUser($user_id)
@@ -89,6 +90,7 @@ class ChatModel extends Model
             $data['message'] = $value->message;
             $data['created_date'] = $value->created_date;
             $data['user_id'] = $value->connect_user_id;
+            $data['is_online'] = $value->getConnectUser->OnlineUser();
             $data['name'] = $value->getConnectUser->name;
             $data['profile_pic'] = $value->getConnectUser->getProfileDirect();
             $data['messagecount'] = $value->CountMessage($value->connect_user_id, $user_id);
@@ -108,5 +110,30 @@ class ChatModel extends Model
     {
         self::where('sender_id','=',$receiver_id)->where('receiver_id','=',$sender_id)
             ->where('status','=','0')->update(['status'=> '1']);
+    }
+
+    public function getFile()
+    {
+        if(!empty($this->file) && file_exists('upload/chat/'.$this->file))
+        {
+            return url('upload/chat/'.$this->file);
+        }
+        else
+        {
+            return "";
+        }
+    }
+
+    static public function getAllChatUserCount()
+    {
+        $user_id = Auth::user()->id;
+        $return = self::select('chat.id')
+            ->join('users as sender', 'sender.id','=','chat.sender_id')
+            ->join('users as receiver', 'receiver.id','=','chat.receiver_id')
+            ->where('chat.receiver_id','=',$user_id)
+            ->where('chat.status','=',0)
+            ->count();
+        
+            return $return;
     }
 }

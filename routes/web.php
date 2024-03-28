@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ImageController;
+use App\Http\Controllers\ChallengeController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StudentController;
@@ -82,6 +82,14 @@ Route::group(['middleware'=>'teacher'], function () {
     Route::get('admin/homework/homework/delete/{id}', [HomeworkController::class, 'delete']);
     Route::get('admin/homework/homework/submitted/{id}', [HomeworkController::class, 'submitted']);
 
+    //challenge 
+    Route::get('admin/homework/challenge', [ChallengeController::class, 'homework']);    
+    Route::get('admin/homework/challenge/add', [ChallengeController::class, 'add']);    
+    Route::post('admin/homework/challenge/add', [ChallengeController::class, 'insert']);    
+    Route::get('admin/homework/challenge/edit/{id}', [ChallengeController::class, 'edit']); 
+    Route::post('admin/homework/challenge/edit/{id}', [ChallengeController::class, 'update']);
+    Route::get('admin/homework/challenge/delete/{id}', [ChallengeController::class, 'delete']);
+
     //change password
     Route::get('admin/change_password', [UserController::class, 'change_password']); 
     Route::post('admin/change_password', [UserController::class, 'update_change_password']); 
@@ -105,7 +113,12 @@ Route::group(['middleware'=>'student'], function () {
     Route::post('student/my_homework/submit_homework/{id}', [HomeworkController::class, 'SubmitHomeworkInsert']);
     Route::get('student/my_submitted_homework', [HomeworkController::class, 'HomeworkSubmittedStudent']); 
 
-
+    //challenge
+    Route::get('student/challenge', [ChallengeController::class, 'ChallengeStudent']);    
+    Route::get('student/challenge/submit/{id}', [ChallengeController::class, 'SubmitChallenge']);
+    Route::post('student/challenge/submit/{id}', [ChallengeController::class, 'ProcessChallenge']);
+    Route::post('student/challenge/result/{id}', [ChallengeController::class, 'ResultChallenge']);
+    
     //change password
     Route::get('student/change_password', [UserController::class, 'change_password']); 
     Route::post('student/change_password', [UserController::class, 'update_change_password']); 

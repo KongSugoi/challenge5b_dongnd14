@@ -20,7 +20,7 @@ class OnlineUser
     {
         if(!empty(Auth::check()))
         {            
-            $expiretime = Carbon::now()->addMinutes(1);
+            $expiretime = Carbon::now()->addMinutes(20);
             Cache::put('OnlineUser'.Auth::user()->id, true, $expiretime);
 
             $getUserInfo = User::getSingle(Auth::user()->id);

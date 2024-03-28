@@ -373,6 +373,8 @@
             success: function(data){
                 $('#AppendMessage').append(data.success);
                 $('#ClearMessage').val('');
+                $('#filename').val('');
+                $('#getFileName').html('');
                 scrolldown();
             },
             error: function(data){
@@ -387,5 +389,14 @@
     }
 
     scrolldown();
+
+    $('body').delegate('#OpenFile', 'click', function(e) {
+        $('#file_name').trigger('click');
+    });
+
+    $('body').delegate('#file_name', 'change', function(e) {
+        var filename = this.file[0].name;    
+        $('#getFileName').html(file_name);
+    });
 </script>
 @endsection

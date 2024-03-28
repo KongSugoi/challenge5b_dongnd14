@@ -4,13 +4,14 @@
             <img style="height: 50px; width: 50px;" src="{{$getReceiver->getProfileDirect()}}" alt="avatar">
         </a>
         <div class="chat-about">
-            <h6 class="m-b-0">{{$getReceiver->name}}</h6>
+            <h6 class="m-b-0" style="color: white;">{{$getReceiver->name}}</h6>
             <small>
 
-                {{$getReceiver->OnlineUser($getReceiver->id)}}
-                
-                Last seen: {{Carbon\Carbon::parse($getReceiver->updated_at)->diffForHumans()}}
-
+                @if(!empty($getReceiver->OnlineUser()))
+                    <span style="color: green">Online</span>
+                @else    
+                    Last seen: {{Carbon\Carbon::parse($getReceiver->updated_at)->diffForHumans()}}
+                @endif
             </small>
         </div>
     </div>
