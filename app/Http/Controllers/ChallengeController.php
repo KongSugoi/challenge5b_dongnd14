@@ -25,13 +25,13 @@ class ChallengeController extends Controller
         $chall->challenge_date = trim($request->challenge_date);    
         $chall->description = trim($request->description);
 
-        if(!empty($request->file('chall_file')))
+        if(!empty($request->file('challenge_file')))
         {
-            $file = $request->file('chall_file');
+            $file = $request->file('challenge_file');
             $filename = $file->getClientOriginalName();;                        
             $file->move('upload/challenge/',$filename);
 
-            $chall->chall_file = $filename;
+            $chall->challenge_file = $filename;
         }
 
         $chall->save();
@@ -94,21 +94,6 @@ class ChallengeController extends Controller
         return view('student.challenge.list',$data);
     }
 
-    /*public function SubmitChallenge($challenge_file, Request $request)
-    {        
-        $chall = ChallengeModel::getSingle($id);
-        $correct_answer=;
-        if ($request->answer === $correct_answer){
-            $file_path = public_path('upload/challenge/'.$challenge_file);
-            $content = file_get_contents($file_path);
-            $status = "Correct Answer!";
-            return view('backend.challenge.content',['status'=>$status, 'content'=>$content]);
-        } else {
-            $content = '';
-            $status = "Wrong Answer! Try Again";
-        }
-        return view('backend.challenge.content',['status'=>$status, 'content'=>$content]);
-    }*/
 
     public function SubmitChallenge($challenge_id)
     {
